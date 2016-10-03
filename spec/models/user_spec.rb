@@ -43,7 +43,7 @@ let(:user3) { User.new(username: "vronnieli", first_name: "veronica", last_name:
   it 'is valid with a unique username' do
     user1.save
     expect(user1).to be_valid
-    user3.save
+    user3.valid?
     expect(user3.errors[:username]).to include("has already been taken")
   end
 
