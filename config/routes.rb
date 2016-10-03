@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :activities
+  resources :locations
+  resources :days
+  resources :itineraries
   resources :users
 
   namespace :api do

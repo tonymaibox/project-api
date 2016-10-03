@@ -1,10 +1,7 @@
-class User < ApplicationRecord
-	has_secure_password
-	
-	has_many :users_itineraries
-	has_many :itineraries, through: :users_itineraries
-
-	has_many :days, through: :itineraries
+class Itinerary < ApplicationRecord
+  has_many :users_itineraries
+  has_many :users, through: :users_itineraries
+	has_many :days
 	has_many :days_locations, through: :days
 	has_many :locations, through: :days_locations
 	has_many :locations_activities, through: :locations

@@ -10,10 +10,54 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160930194422) do
+ActiveRecord::Schema.define(version: 20161003194805) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "days", force: :cascade do |t|
+    t.integer  "day"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "itinerary_id"
+    t.index ["itinerary_id"], name: "index_days_on_itinerary_id", using: :btree
+  end
+
+  create_table "days_locations", force: :cascade do |t|
+    t.integer  "day_id"
+    t.integer  "location_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["day_id"], name: "index_days_locations_on_day_id", using: :btree
+    t.index ["location_id"], name: "index_days_locations_on_location_id", using: :btree
+  end
+
+  create_table "itineraries", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "city"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "locations_activities", force: :cascade do |t|
+    t.integer  "location_id"
+    t.integer  "activity_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["activity_id"], name: "index_locations_activities_on_activity_id", using: :btree
+    t.index ["location_id"], name: "index_locations_activities_on_location_id", using: :btree
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "username"
@@ -25,4 +69,20 @@ ActiveRecord::Schema.define(version: 20160930194422) do
     t.datetime "updated_at",      null: false
   end
 
+  create_table "users_itineraries", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "itinerary_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["itinerary_id"], name: "index_users_itineraries_on_itinerary_id", using: :btree
+    t.index ["user_id"], name: "index_users_itineraries_on_user_id", using: :btree
+  end
+
+  add_foreign_key "days", "itineraries"
+  add_foreign_key "days_locations", "days"
+  add_foreign_key "days_locations", "locations"
+  add_foreign_key "locations_activities", "activities"
+  add_foreign_key "locations_activities", "locations"
+  add_foreign_key "users_itineraries", "itineraries"
+  add_foreign_key "users_itineraries", "users"
 end
