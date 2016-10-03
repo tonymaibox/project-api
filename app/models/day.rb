@@ -1,5 +1,6 @@
 class Day < ApplicationRecord
-	
+	validates :day, presence: true
+
 	belongs_to :itinerary, optional: true
 	has_many :users_itineraries, through: :itinerary
 	has_many :users, through: :users_itineraries
