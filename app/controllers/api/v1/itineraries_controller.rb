@@ -8,6 +8,7 @@ module Api
 					render json: Itinerary.search(params[:search]).order("id DESC"), include: { days: {locations: [ :activities ] } }
 				else
 					render json: Itinerary.all, include: { days: {locations: [ :activities ] } }
+				end
 			end
 
 		  def show
