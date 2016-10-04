@@ -1,11 +1,13 @@
 require 'rails_helper'
 
 describe Itinerary, type: :model do
-let(:itinerary1) { Itinerary.new(name: "Trip through NYC") }
-let(:itinerary2) { Itinerary.new() }
-let(:day1) { Day.new(day: 1) }
-let(:location1) { Location.new(city: "New York City") }
-let(:activity1) { Activity.new(name: "Shopping") }
+
+  let(:user1) { User.new(username: "vronnieli", first_name: "veronica", last_name: "li", email: "vronnieli@mail.com", password: "password") }
+  let(:itinerary1) { Itinerary.new(name: "Trip through NYC") }
+  let(:itinerary2) { Itinerary.new() }
+  let(:day1) { Day.new(day: 1) }
+  let(:location1) { Location.new(city: "New York City") }
+  let(:activity1) { Activity.new(name: "Shopping") }
 
   it 'is valid with a name' do
     expect(itinerary1).to be_valid
@@ -28,7 +30,7 @@ let(:activity1) { Activity.new(name: "Shopping") }
     expect(itinerary1.locations).to include(location1)
   end
 
-  it "should have a #activities method that returns a collection of activities associated to that itinerary" do
+  it "should have an #activities method that returns a collection of activities associated to that itinerary" do
     itinerary1.days << day1
     itinerary1.days.first.locations << location1
     itinerary1.days.first.locations.first.activities << activity1

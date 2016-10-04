@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-describe User, type: :model do
-let(:user1) { User.new(username: "vronnieli", first_name: "veronica", last_name: "li", email: "vronnieli@mail.com", password: "password") }
-let(:user2) { User.new() }
-let(:user3) { User.new(username: "vronnieli", first_name: "veronica", last_name: "li", email: "vronnieli@mail.com", password: "password") }
+  describe User, type: :model do
+  let(:user1) { User.new(username: "vronnieli", first_name: "veronica", last_name: "li", email: "vronnieli@mail.com", password: "password") }
+  let(:user2) { User.new() }
+  let(:user3) { User.new(username: "vronnieli", first_name: "veronica", last_name: "li", email: "vronnieli@mail.com", password: "password") }
 
   it 'is valid with a username' do
     expect(user1).to be_valid
