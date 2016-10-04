@@ -1,4 +1,7 @@
 class Itinerary < ApplicationRecord
+  validates	:name, presence: true
+  validates :name, uniqueness: true
+
   has_many :users_itineraries
   has_many :users, through: :users_itineraries
 	has_many :days

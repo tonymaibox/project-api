@@ -1,4 +1,6 @@
 class Activity < ApplicationRecord
+	validates :name, presence: true
+
 	has_many :locations_activities
 	has_many :locations, through: :locations_activities
 	has_many :days_locations, through: :locations

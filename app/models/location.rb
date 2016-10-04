@@ -1,4 +1,5 @@
 class Location < ApplicationRecord
+	validates	:city, presence: true
 	has_many :days_locations
 	has_many :days, through: :days_locations
 	# should it be belongs_to :itinerary
