@@ -9,4 +9,16 @@ class Itinerary < ApplicationRecord
 	has_many :locations, through: :days_locations
 	has_many :locations_activities, through: :locations
 	has_many :activities, through: :locations_activities
+
+	def self.search(query)
+		qArray = []
+
+		query.split(" ").each do |term|
+			qArray << where("name ILIKE ?", "%#{term}%")
+			qArray << joins(:locations).where("city ILIKE ?", "%#{term}%")
+		end
+		
+		qArray.flatten.uniq {|x| x }
+	end
+
 end

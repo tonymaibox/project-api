@@ -3,7 +3,11 @@ module Api
 		class ItinerariesController < ApplicationController
 
 			def index
-				render json: Itinerary.all, include: { days: {locations: [ :activities ] } }
+				# render json: Itinerary.all, include: { days: {locations: [ :activities ] } }
+				if params[:search]
+					render json: Itinerary.search(params[:search]).order("id DESC"), include: { days: {locations: [ :activities ] } }
+				else
+					render json: Itinerary.all, include: { days: {locations: [ :activities ] } }
 			end
 
 		  def show
