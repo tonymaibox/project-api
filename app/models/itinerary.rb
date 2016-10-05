@@ -10,7 +10,16 @@ class Itinerary < ApplicationRecord
 	has_many :locations_activities, through: :locations
 	has_many :activities, through: :locations_activities
 
+# checkboxes of activities
+# multiple input entries (activities, location, days)
+
 	def self.search(query)
+		params[:location] / Location.search(params[:location])
+		params[:activities] / Activity.search(params[:activity]) 
+		params[:days] / Day.search(params[:activity])
+
+
+
 		qArray = []
 
 		query.split(" ").each do |term|
@@ -20,5 +29,16 @@ class Itinerary < ApplicationRecord
 		
 		qArray.flatten.uniq {|x| x }
 	end
+
+	# def self.search(query)
+	# 	qArray = []
+
+	# 	query.split(" ").each do |term|
+	# 		qArray << where("name ILIKE ?", "%#{term}%")
+	# 		qArray << joins(:locations).where("city ILIKE ?", "%#{term}%")
+	# 	end
+		
+	# 	qArray.flatten.uniq {|x| x }
+	# end
 
 end

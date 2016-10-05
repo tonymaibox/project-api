@@ -15,6 +15,12 @@ module Api
 		    render json: Itinerary.find(params[:id])
 		  end
 
+		  def search
+		  	# 3 params coming in, activities, locations, days
+		  	@list = Itinerary.search(params)
+		  	render json: @list
+		  end
+
 		  def create
 		    i = Itinerary.new(itinerary_params)
 		    if i.save
