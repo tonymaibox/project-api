@@ -10,4 +10,9 @@ class Activity < ApplicationRecord
 	has_one :itinerary
 	has_many :users_itineraries, through: :itinerary
 	has_many :users, through: :users_itineraries
+
+	def self.search(query)
+		where("name ILIKE ?", "%#{query}%")
+	end
+
 end

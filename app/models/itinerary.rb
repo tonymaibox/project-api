@@ -14,9 +14,12 @@ class Itinerary < ApplicationRecord
 # multiple input entries (activities, location, days)
 
 	def self.search(query)
-		params[:location] / Location.search(params[:location])
-		params[:activities] / Activity.search(params[:activity]) 
-		params[:days] / Day.search(params[:activity])
+		# @list_of_itineraries = []
+		# Day.search(params[:activity]
+
+		# Location.search(params[:location])
+		# Activity.search(params[:activity]) 
+		
 
 
 

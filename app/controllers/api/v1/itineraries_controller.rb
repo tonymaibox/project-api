@@ -17,6 +17,12 @@ module Api
 
 		  def search
 		  	# 3 params coming in, activities, locations, days
+		  	# params[:location]
+		  	# params[:activity]
+		  	# params[:day]
+		  	@activity_result = Activity.search(params[:activity])
+		  	@location_result = Location.search(params[:location])
+		  	@day_result = Day.search(params[:day])
 		  	@list = Itinerary.search(params)
 		  	render json: @list
 		  end
