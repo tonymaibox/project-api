@@ -17,22 +17,34 @@ module Api
 
 		  def search
 		  	# binding.pry
-		  	@activity_result = Activity.search(params[:activity])
-		  	@location_result = Location.search(params[:location])
-		  	@day_result = Day.search(params[:day])
+        if params[:activity] == ""
+          @activity_result = []
+        else
+		  	  @activity_result = Activity.search(params[:activity])
+        end
+        if params[:location] == ""
+          @location_result = []
+        else
+  		  	@location_result = Location.search(params[:location])
+        end
+        if params[:day] == ""
+          @day_result = []
+        else
+          @day_result = Day.search(params[:day])
+        end
 		  	@list = []
-		
+
 		  	@activity_result.each {|activity| @list << activity.itineraries }
 		  	@location_result.each {|location| @list << location.itineraries }
 		  	@day_result.each {|day| @list << day.itinerary }
 
-		  	binding.pry
+		  	# binding.pry
 
 		  	render json: @list.flatten.uniq, include: { days: {locations: [ :activities ] } }
 		  end
 
 		  def create
-		
+
 		    i = Itinerary.create(name: params[:itinerary][:name])
 		    Day.creator([i.id, params[:itinerary][:days]])
 
