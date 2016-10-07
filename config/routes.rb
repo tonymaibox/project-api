@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   namespace :api do
   	namespace :v1 do
   		post '/login', to: "sessions#create"
+      # get '/itineraries/:search', to: "itineraries#search"
+      post '/itineraries/:search', to: "itineraries#search"
+      get '/itineraries/:id', to: "itineraries#show"
       # We will likely need to limit the routes for the below resources:
       resources :activities
       resources :locations
