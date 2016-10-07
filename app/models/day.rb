@@ -30,4 +30,17 @@ class Day < ApplicationRecord
 		list
 	end
 
+# Day.creator([i.id, params[:itinerary][:days]])
+	def self.creator(params_array)
+
+		days = params_array[1].collect do |day|
+			Day.create(day: day[:day], itinerary_id: params_array[0])
+		end
+		if days.length > 0
+			days.each_with_index do |day, index|
+				Location.creator([day.id, params_array[1][index][:locations]])
+			end
+	end
+end
+
 end

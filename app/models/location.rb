@@ -22,6 +22,19 @@ class Location < ApplicationRecord
 		list.flatten!
 	end
 
+# Location.creator([day.id, params_array[:locations]])
+	def self.creator(params_array)
+		locations = params_array[1].collect do |location|
+			Location.create(city: location[:city], day_ids: params_array[0])
+		end
+		if locations.length > 0
+			locations.each_with_index do |location,index|
+				Activity.creator([location.id, params_array[1][index][:activities]])
+		end
+	end
+	
+end
+
 	# def self.search_itineraries(query)
 	# 	list = []
 	# 	self.search(query).each do |location|

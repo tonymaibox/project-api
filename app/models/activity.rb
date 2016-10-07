@@ -15,4 +15,12 @@ class Activity < ApplicationRecord
 		where("name ILIKE ?", "%#{query}%")
 	end
 
+# Activity.creator([location.id, params_array[:activities]])
+	def self.creator(params_array)
+		activities = params_array[1].collect do |activity|
+			Activity.create(name: activity[:name], location_ids: params_array[0])
+	end
+	
+end
+
 end
