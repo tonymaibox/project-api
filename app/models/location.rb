@@ -2,8 +2,8 @@ class Location < ApplicationRecord
 	validates	:city, presence: true
 	has_many :days_locations
 	has_many :days, through: :days_locations
-	# should it be belongs_to :itinerary
-	has_one :itinerary
+	# belongs_to :itinerary, optional: true
+	has_many :itineraries, through: :days
 	has_many :users_itineraries, through: :itinerary
 	has_many :users, through: :users_itineraries
 
@@ -17,15 +17,23 @@ class Location < ApplicationRecord
 	def self.search_itineraries(query)
 		list = []
 		self.search(query).each do |location|
-			Itinerary.all.collect do |itinerary|
-				itinerary.locations.collect do |itinerary_location|
-					if itinerary_location.id == location.id
-						list << itinerary
-					end
-				end
-			end
+			list << location.itineraries
 		end
-		list
+		list.flatten!
 	end
+
+	# def self.search_itineraries(query)
+	# 	list = []
+	# 	self.search(query).each do |location|
+	# 		Itinerary.all.collect do |itinerary|
+	# 			itinerary.locations.collect do |itinerary_location|
+	# 				if itinerary_location.id == location.id
+	# 					list << itinerary
+	# 				end
+	# 			end
+	# 		end
+	# 	end
+	# 	list
+	# end
 
 end

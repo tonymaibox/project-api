@@ -6,8 +6,8 @@ class Activity < ApplicationRecord
 	has_many :days_locations, through: :locations
 	has_many :days, through: :days_locations
 
-	# belongs_to :itinerary
-	has_one :itinerary
+	# belongs_to :itinerary, optional: true
+	has_many :itineraries, through: :days
 	has_many :users_itineraries, through: :itinerary
 	has_many :users, through: :users_itineraries
 
