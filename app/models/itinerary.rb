@@ -1,6 +1,6 @@
 class Itinerary < ApplicationRecord
   validates	:name, presence: true
-  validates :name, uniqueness: true
+  # validates :name, uniqueness: true
 
   has_many :users_itineraries
   has_many :users, through: :users_itineraries
@@ -10,7 +10,19 @@ class Itinerary < ApplicationRecord
 	has_many :locations_activities, through: :locations
 	has_many :activities, through: :locations_activities
 
+# checkboxes of activities
+# multiple input entries (activities, location, days)
+
 	def self.search(query)
+		# @list_of_itineraries = []
+		# Day.search(params[:activity]
+
+		# Location.search(params[:location])
+		# Activity.search(params[:activity]) 
+		
+
+
+
 		qArray = []
 
 		query.split(" ").each do |term|
@@ -20,5 +32,16 @@ class Itinerary < ApplicationRecord
 		
 		qArray.flatten.uniq {|x| x }
 	end
+
+	# def self.search(query)
+	# 	qArray = []
+
+	# 	query.split(" ").each do |term|
+	# 		qArray << where("name ILIKE ?", "%#{term}%")
+	# 		qArray << joins(:locations).where("city ILIKE ?", "%#{term}%")
+	# 	end
+		
+	# 	qArray.flatten.uniq {|x| x }
+	# end
 
 end
