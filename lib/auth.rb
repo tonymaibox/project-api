@@ -5,7 +5,7 @@ class Auth
 	ALGORITHM = 'HS256'
 
   def self.issue(payload)
-		binding.pry
+		# binding.pry
     JWT.encode(
       payload,
       auth_secret,
