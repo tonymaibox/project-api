@@ -5,6 +5,7 @@ class Auth
 	ALGORITHM = 'HS256'
 
   def self.issue(payload)
+		# binding.pry
     JWT.encode(
       payload,
       auth_secret,
@@ -12,9 +13,9 @@ class Auth
   end
 
   def self.decode(token)
-    JWT.decode(token, 
-      auth_secret, 
-      true, 
+    JWT.decode(token,
+      auth_secret,
+      true,
       { algorithm: ALGORITHM }).first
   end
 
@@ -22,4 +23,4 @@ class Auth
     ENV["AUTH_SECRET"]
   end
 
-end  
+end
