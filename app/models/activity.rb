@@ -19,8 +19,16 @@ class Activity < ApplicationRecord
 	def self.creator(params_array)
 		activities = params_array[1].collect do |activity|
 			Activity.create(name: activity[:name], location_ids: params_array[0])
+		end
 	end
-	
-end
+
+	def self.updater(params_array)
+binding.pry
+		activities = params_array[1].collect do |activity|
+			a = Activity.find_or_create_by(id: activity[:id])
+			a.update(name: activity[:name], location_ids: params_array[0])
+			a
+		end
+	end
 
 end

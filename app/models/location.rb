@@ -30,9 +30,25 @@ class Location < ApplicationRecord
 		if locations.length > 0
 			locations.each_with_index do |location,index|
 				Activity.creator([location.id, params_array[1][index][:activities]])
+			end
 		end
 	end
 	
+	def self.updater(params_array)
+binding.pry
+		locations = params_array[1].collect do |location|
+			l = Location.find(location[:id])
+			l.update(city: location[:city], day_ids: params_array[0])
+			l
+		end
+		if locations.length > 0
+			locations.each_with_index do |location,index|
+binding.pry
+				Activity.updater([location.id, params_array[1][index][:activities]])
+			end
+		end
+	end
+
 end
 
 	# def self.search_itineraries(query)
@@ -48,5 +64,3 @@ end
 	# 	end
 	# 	list
 	# end
-
-end

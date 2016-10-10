@@ -56,6 +56,13 @@ module Api
 		    # end
 		  end
 
+		  def update
+		  	# binding.pry
+		  	i = Itinerary.find(params[:itinerary][:id])
+		    Day.updater([i.id, params[:itinerary][:days]])
+		    binding.pry
+		  end
+
 		  private
 
 		  # def itinerary_params
