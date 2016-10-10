@@ -1,5 +1,5 @@
 class ItinerarySerializer < ActiveModel::Serializer
-  attributes :id, :name
+  attributes :id, :name, :upvotes
   has_many :users
   has_many :days
 
