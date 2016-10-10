@@ -1,22 +1,23 @@
 module Api
 	module V1
 		class SessionsController < ApplicationController
-			# skip_before_action :authenticate
+			skip_before_action :authenticate
 
-			  # def create
-			  # 	# binding.pry
-			  #   user = User.find_by(email: params[:email])
-			  #   if user.authenticate(params[:password])
-			  #     jwt = Auth.issue({id: user.id})
-			  #     render json: {jwt: jwt}
-			  #   else
-			  #   end
-			  # end
+		  def create
+		  	# binding.pry
+		    user = User.find_by(username: params[:username])
+				# binding.pry
+		    if user.authenticate(params[:password])
+		      jwt = Auth.issue({id: user.id})
+		      render json: {jwt: jwt}
+		    end
+		  end
 
-			  private
-			    def auth_params
-			      params.require(:auth).permit(:email, :password)
-			    end
+		  private
+
+	    def auth_params
+	      params.require(:auth).permit(:username, :password)
+	    end
 		end
 	end
 end
