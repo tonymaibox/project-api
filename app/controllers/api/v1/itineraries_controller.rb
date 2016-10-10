@@ -1,7 +1,7 @@
 module Api
 	module V1
 		class ItinerariesController < ApplicationController
-
+		skip_before_action :authenticate, only: [:index, :show, :search]
 			def index
 				# render json: Itinerary.all, include: { days: {locations: [ :activities ] } }
 				if params[:search]
