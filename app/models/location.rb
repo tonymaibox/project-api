@@ -37,9 +37,10 @@ class Location < ApplicationRecord
 	def self.updater(params_array)
 binding.pry
 		locations = params_array[1].collect do |location|
-			l = Location.find(location[:id])
-			l.update(city: location[:city], day_ids: params_array[0])
-			l
+			dl = DaysLocation.find_or_create_by(day_id: params_array[0])
+			loc = Location.find_or_create_by(id: dl.location_id)
+			loc.update(city: location[:city], day_ids: params_array[0])
+			loc
 		end
 		if locations.length > 0
 			locations.each_with_index do |location,index|

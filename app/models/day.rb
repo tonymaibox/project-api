@@ -44,15 +44,15 @@ class Day < ApplicationRecord
 	end
 
 	def self.updater(params_array)
-# binding.pry
+binding.pry
 		days = params_array[1].collect do |day|
-			d = Day.find(day[:id])
+			d = Day.find_or_create_by(itinerary_id: params_array[0])
 			d.update(day: day[:day], itinerary_id: params_array[0])
 			d
 		end
 		if days.length > 0
 			days.each_with_index do |day, index|
-# binding.pry
+binding.pry
 				Location.updater([day.id, params_array[1][index][:locations]])
 			end
 		end

@@ -2,6 +2,7 @@ module Api
 	module V1
 		class ItinerariesController < ApplicationController
 		skip_before_action :authenticate, only: [:index, :show, :search]
+			
 			def index
 				# render json: Itinerary.all, include: { days: {locations: [ :activities ] } }
 				if params[:search]
@@ -57,7 +58,7 @@ module Api
 		  end
 
 		  def update
-		  	# binding.pry
+		  	binding.pry
 		  	i = Itinerary.find(params[:itinerary][:id])
 		    Day.updater([i.id, params[:itinerary][:days]])
 		    binding.pry
