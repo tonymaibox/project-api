@@ -1,7 +1,9 @@
 module Api
 	module V1
 		class ItinerariesController < ApplicationController
+
 		skip_before_action :authenticate, only: [:index, :show, :search]
+
 			def index
 				# render json: Itinerary.all, include: { days: {locations: [ :activities ] } }
 				if params[:search]
@@ -44,7 +46,7 @@ module Api
 		  end
 
 		  def create
-
+				binding.pry
 		    i = Itinerary.create(name: params[:itinerary][:name])
 		    Day.creator([i.id, params[:itinerary][:days]])
 
@@ -61,7 +63,6 @@ module Api
 		  # def itinerary_params
 		  # 	params.require(:itinerary).permit(:name)
 		  # end
-
 		end
 	end
 end

@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::API
 
-before_action :authenticate 
+before_action :authenticate
 
   def logged_in?
     !!current_user
@@ -8,7 +8,7 @@ before_action :authenticate
 
   def current_user
     if auth_present?
-      user = User.find(auth["user"])
+      user = User.find(auth["id"])
       if user
         @current_user ||= user
       end
