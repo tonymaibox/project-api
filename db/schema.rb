@@ -44,8 +44,9 @@ ActiveRecord::Schema.define(version: 20161009142852) do
 
   create_table "itineraries", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.integer  "upvotes",    default: 0
   end
 
   create_table "locations", force: :cascade do |t|
