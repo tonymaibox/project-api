@@ -4,9 +4,7 @@ module Api
 			skip_before_action :authenticate
 
 			  def create
-			  	# binding.pry
 			    user = User.find_by(username: params[:username])
-					# binding.pry
 			    if user.authenticate(params[:password])
 			      jwt = Auth.issue({id: user.id})
 			      render json: {jwt: jwt}

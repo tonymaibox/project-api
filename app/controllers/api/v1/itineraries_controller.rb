@@ -18,7 +18,6 @@ module Api
 		  end
 
 		  def search
-		  	# binding.pry
         if params[:activity] == ""
           @activity_result = []
         else
@@ -40,22 +39,12 @@ module Api
 		  	@location_result.each {|location| @list << location.itineraries }
 		  	@day_result.each {|day| @list << day.itinerary }
 
-		  	# binding.pry
-
 		  	render json: @list.flatten.uniq, include: { days: {locations: [ :activities ] } }
 		  end
 
 		  def create
-				binding.pry
 		    i = Itinerary.create(name: params[:itinerary][:name])
 		    Day.creator([i.id, params[:itinerary][:days]])
-
-
-		    # if i.save
-		    #   render json: i
-		    # else
-		    #   render json: i.errors, status: 500
-		    # end
 		  end
 
 		  private
