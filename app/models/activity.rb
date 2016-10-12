@@ -25,8 +25,8 @@ class Activity < ApplicationRecord
 	def self.updater(params_array)
 binding.pry
 		activities = params_array[1].collect do |activity|
-			loc_act = LocationsActivity.find_or_create_by(activity_id: params_array[0])
-			a = Activity.find_or_create_by(id: loc_act.id)
+			loc_act = LocationsActivity.find_or_create_by(location_id: params_array[0])
+			a = Activity.find_or_create_by(id: loc_act.activity_id)
 			a.update(name: activity[:name], location_ids: params_array[0])
 			a
 		end
