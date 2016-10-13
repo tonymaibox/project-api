@@ -32,7 +32,7 @@ class Day < ApplicationRecord
 
 # Day.creator([i.id, params[:itinerary][:days]])
 	def self.creator(params_array)
-
+# binding.pry
 		days = params_array[1].collect do |day|
 			Day.create(day: day[:day], itinerary_id: params_array[0])
 		end
@@ -45,15 +45,22 @@ class Day < ApplicationRecord
 
 	def self.updater(params_array)
 		# [itinerary_id, [collections of days]]
-binding.pry
-		days = params_array[1].each do |day|
-			found_day = Day.find_or_create_by(itinerary_id: params_array[0])
-			found_day.update(day: day[:day], itinerary_id: params_array[0])
+		list_days = Day.where(itinerary_id: params_array[0])
+# binding.pry
+		days = params_array[1].each_with_index do |day, index|
+# binding.pry
+			list_days.each do |list_day|
+				if list_day.id == day[:id]
+					list_day.update(day: index+1, itinerary_id: params_array[0])
+				end
+			end
+
+			# found_day.update(day: day[:day], itinerary_id: params_array[0])
 		end
-binding.pry
+# binding.pry
 		if days.length > 0
 			days.each_with_index do |day, index|
-binding.pry
+# binding.pry
 				Location.updater([day[:id], params_array[1][index][:locations]])
 			end
 		end

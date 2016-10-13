@@ -24,6 +24,7 @@ class Location < ApplicationRecord
 
 # Location.creator([day.id, params_array[:locations]])
 	def self.creator(params_array)
+# binding.pry
 		locations = params_array[1].collect do |location|
 			Location.create(city: location[:city], day_ids: params_array[0])
 		end
