@@ -43,7 +43,6 @@ module Api
 		  end
 
 		  def create
-		  	# binding.pry
 		    i = Itinerary.create(name: params[:itinerary][:name])
 		    Day.creator([i.id, params[:itinerary][:days]])
 		  end
