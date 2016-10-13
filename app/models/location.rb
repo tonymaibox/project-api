@@ -34,7 +34,6 @@ class Location < ApplicationRecord
 	end
 
 	def self.updater(params_array)
-# binding.pry
 		locations = params_array[1].each do |location|
 			dl = DaysLocation.find_or_create_by(day_id: params_array[0])
 			loc = Location.find_or_create_by(id: dl.location_id)
