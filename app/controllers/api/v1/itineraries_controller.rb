@@ -43,8 +43,16 @@ module Api
 		  end
 
 		  def create
+		  	# binding.pry
 		    i = Itinerary.create(name: params[:itinerary][:name])
 		    Day.creator([i.id, params[:itinerary][:days]])
+		  end
+
+		  def update
+		  	binding.pry
+		  	i = Itinerary.find(params[:itinerary][:id])
+		    Day.updater([i.id, params[:itinerary][:days]])
+		    binding.pry
 		  end
 
 		  private
