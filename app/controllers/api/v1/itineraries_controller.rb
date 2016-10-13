@@ -5,6 +5,7 @@ module Api
 		skip_before_action :authenticate, only: [:index, :show, :search]
 
 			def index
+				# binding.pry
 				# render json: Itinerary.all, include: { days: {locations: [ :activities ] } }
 				if params[:search]
 					render json: Itinerary.search(params[:search]).order("id DESC"), include: { days: {locations: [ :activities ] } }
@@ -16,6 +17,17 @@ module Api
 		  def show
 		    render json: Itinerary.find(params[:id])
 		  end
+
+			def my_lyst
+				binding.pry
+				@mylyst = Itinerary.where(user_id: 1)
+				render json: @mylist, include: {
+					users: [{}],
+					days: {
+						locations: [:activities]
+					}
+				}
+			end
 
 		  def search
         if params[:activity] == ""

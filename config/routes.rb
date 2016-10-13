@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   		post '/login', to: "sessions#create"
       # get '/itineraries/:search', to: "itineraries#search"
       post '/itineraries/:search', to: "itineraries#search"
+      post '/itineraries/:my_lyst', to: "itineraries#my_lyst"
       get '/itineraries/:id', to: "itineraries#show"
       # We will likely need to limit the routes for the below resources:
       resources :activities
