@@ -30,9 +30,7 @@ class Day < ApplicationRecord
 		list
 	end
 
-# Day.creator([i.id, params[:itinerary][:days]])
 	def self.creator(params_array)
-# binding.pry
 		days = params_array[1].collect do |day|
 			Day.create(day: day[:day], itinerary_id: params_array[0])
 		end
