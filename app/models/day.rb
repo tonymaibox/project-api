@@ -44,7 +44,6 @@ class Day < ApplicationRecord
 	def self.updater(params_array)
 		# [itinerary_id, [collections of days]]
 		list_days = Day.where(itinerary_id: params_array[0])
-# binding.pry
 		days = params_array[1].each_with_index do |day, index|
 # binding.pry
 			list_days.each do |list_day|

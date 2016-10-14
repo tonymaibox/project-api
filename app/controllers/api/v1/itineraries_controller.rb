@@ -9,7 +9,7 @@ module Api
 				if params[:search]
 					render json: Itinerary.search(params[:search]).order("id DESC"), include: { days: {locations: [ :activities ] } }
 				else
-					render json: Itinerary.all, include: {users: [{}], days: {locations: [ :activities ] } }
+					render json: Itinerary.all.order("upvotes DESC"), include: {users: [{}], days: {locations: [ :activities ] } }
 				end
 			end
 
@@ -59,6 +59,7 @@ module Api
 				i.save
 		    Day.updater([i.id, params[:itinerary][:days]])
 		    #binding.pry
+				render json: Itinerary.all.order("upvotes DESC"), include: {users: [{}], days: {locations: [ :activities ] } }
 		  end
 
 		  private
