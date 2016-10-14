@@ -49,6 +49,8 @@ module Api
 # binding.pry
 		    i = Itinerary.create(name: params[:itinerary][:name], user_ids: user_id_object["id"])
 		    Day.creator([i.id, params[:itinerary][:days]])
+
+				render json: i, include: {users: [{}], days: {locations: [ :activities ] } }
 		  end
 
 		  def update
