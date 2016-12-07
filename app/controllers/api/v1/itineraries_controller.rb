@@ -9,7 +9,7 @@ module Api
 				if params[:search]
 					render json: Itinerary.search(params[:search]).order("id DESC"), include: { days: {locations: [ :activities ] } }
 				else
-					render json: Itinerary.all, include: {users: [{}], days: {locations: [ :activities ] } }
+					render json: Itinerary.all.order("upvotes DESC"), include: {users: [{}], days: {locations: [ :activities ] } }
 				end
 			end
 
@@ -43,15 +43,22 @@ module Api
 		  end
 
 		  def create
-		    i = Itinerary.create(name: params[:itinerary][:name])
+# binding.pry
+		  	user_id_object = Auth.decode(params[:user])
+		  	# user = User.find(user_id_object["id"])
+# binding.pry
+		    i = Itinerary.create(name: params[:itinerary][:name], user_ids: user_id_object["id"])
 		    Day.creator([i.id, params[:itinerary][:days]])
+
+				render json: i, include: {users: [{}], days: {locations: [ :activities ] } }
 		  end
 
 		  def update
-		  	# binding.pry
 		  	i = Itinerary.find(params[:itinerary][:id])
+				i.upvotes = params[:itinerary][:upvotes]
+				i.save
 		    Day.updater([i.id, params[:itinerary][:days]])
-		    # binding.pry
+				render json: Itinerary.all.order("upvotes DESC"), include: {users: [{}], days: {locations: [ :activities ] } }
 		  end
 
 		  private

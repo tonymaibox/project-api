@@ -37,7 +37,6 @@ class Activity < ApplicationRecord
 	end
 
 	def self.updater(params_array)
-# binding.pry
 		activities = params_array[1].each do |activity|
 			loc_act = LocationsActivity.find_or_create_by(location_id: params_array[0])
 			a = Activity.find_or_create_by(id: loc_act.activity_id)
