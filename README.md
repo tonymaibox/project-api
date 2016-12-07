@@ -1,24 +1,7 @@
-# README
+# wanderlyst API (V1)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+To run locally, simply clone down and run ```bundle install``` to install dependencies.
 
-Things you may want to cover:
+Once complete, open PostgreSQL and run ```rake db:create```, ```rake db:migrate```, and then ```rake db:seed``` to set up the database.
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Finally, run ```rails s``` to start localhost server.
